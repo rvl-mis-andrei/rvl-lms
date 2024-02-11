@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 // use App\Services\Device\AccountabilityService;
+
+use App\Services\MISServices\TrainingVideos;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -12,10 +14,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        // $this->app->bind(AccountabilityService::class, function ($app) {
-        //     $request = $app['request'];
-        //     return new AccountabilityService($request);
-        // });
+        $this->app->bind(TrainingVideos::class, function ($app) {
+            $request = $app['request'];
+            return new TrainingVideos($request);
+        });
 
         // $this->app->bind(SystemRoute::class, function ($app) {
         //     return new SystemRoute();

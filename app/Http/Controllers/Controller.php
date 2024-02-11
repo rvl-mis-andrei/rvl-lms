@@ -71,7 +71,11 @@ class Controller extends BaseController
 
     protected function _decrypt($data)
     {
-        return Crypt::decryptString($data);
+        if (!empty($data)) {
+            return Crypt::decryptString($data);
+        } else {
+            return null;
+        }
     }
 
     public function _dateFormatter($date,$format)
@@ -125,6 +129,19 @@ class Controller extends BaseController
             'clear'=>$limiter->clear($key),
             default=>  null,
         };
+    }
+
+    function _generateUniqueString($l = 10)
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $timestamp = microtime();
+        $randomString = '';
+
+        for ($i = 0; $i < $l; $i++) {
+            $randomString .= $characters[rand(0, strlen($characters) - 1)];
+        }
+
+        return $timestamp.$randomString;
     }
 
 }

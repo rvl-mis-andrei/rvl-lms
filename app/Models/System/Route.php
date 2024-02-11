@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Route extends Model
 {
     use HasFactory;
-    protected $table ='icm_routes';
+    protected $table ='lms_routes';
 }
