@@ -33,6 +33,13 @@ class Page extends Controller
 
             'dashboard' => view('mis.0001'),
 
+            'training-videos' => view('mis.0002'),
+            'new-training-videos' => view('mis.0021'),
+
+            'videos-categories' => view('mis.0003'),
+
+            'activity-logs' => view('mis.0004'),
+
             default => false
 
         };

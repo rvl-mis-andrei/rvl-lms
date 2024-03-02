@@ -53,68 +53,114 @@ export function gs_Modal(modal_id,action='hide'){
     }
 }
 
-export function gs_SelectSearch(select,modal_id)
-{
-    $(select).select2({
-        dropdownParent: $(modal_id)
-    });
-}
-
-//  SELECT2 NO SEARCH
-export async function gs_Select(div='.form-select1',modal_id){
+export async function gs_Select2(div='.form-select2'){
 
     let element = $(div);
 
     element.select2({
         width: '100%',
         minimumResultsForSearch: Infinity,
-        dropdownParent: $(modal_id)
     });
 
 }
 
-export function _pickDate(element,format,set_date=false){
-
-    let date = '';
-
-    date = flatpickr(element,{
-        showMonths: true
-    });
-
-    if(set_date){
-        date.setDate(new Date(set_date));
-    }
-}
-
-export function _datePickr(element,format,set_date=false){
-
-    new tempusDominus.TempusDominus(document.getElementById(element), {
-        localization: {
-            format: "MMMM/yyyy",
+export function gs_Quill(selector){
+    const options = {
+        modules: {
+            toolbar: [
+                [{ header: [1, 2, !1] }],
+                ["bold", "italic", "underline"],
+                ["image", "code-block"],
+            ],
         },
-        display: {
-            viewMode: "calendar",
-            components: {
-                decades: false,
-                year: true,
-                month: true,
-                date: false,
-                hours: false,
-                minutes: false,
-                seconds: false
-            },
-            icons: {
-                time: "ki-outline ki-time fs-1",
-                date: "ki-outline ki-calendar fs-1",
-                up: "ki-outline ki-up fs-1",
-                down: "ki-outline ki-down fs-1",
-                previous: "bi bi-arrow-left-short fs-1",
-                next: "bi bi-arrow-right-short fs-1",
-                today: "ki-outline ki-check fs-1",
-                clear: "ki-outline ki-trash fs-1",
-                close: "ki-outline ki-cross fs-1",
-            },
-        }
-    });
+        placeholder: "Type your text here...",
+        theme: "snow",
+      };
+      const quill = new Quill(document.querySelector(selector), options);
+      return quill;
 }
+
+export function gs_FilePond(selector){
+
+    FilePond.registerPlugin(
+        FilePondPluginMediaPreview,
+        FilePondPluginFileValidateType
+    );
+    const filePond = FilePond.create(document.querySelector(selector), {
+        labelIdle: `Drag & Drop or <span class="filepond--label-action">Browse</span> your files`,
+        maxFiles: 10,
+        allowMultiple: false,
+        acceptedFileTypes: ['video/*'],
+        allowPaste:false,
+        allowVideoPreview: true,
+        allowAudioPreview: true,
+
+    });
+    return filePond
+}
+
+// export function gs_SelectSearch(select,modal_id)
+// {
+//     $(select).select2({
+//         dropdownParent: $(modal_id)
+//     });
+// }
+
+// //  SELECT2 NO SEARCH
+// export async function gs_Select(div='.form-select1',modal_id){
+
+//     let element = $(div);
+
+//     element.select2({
+//         width: '100%',
+//         minimumResultsForSearch: Infinity,
+//         dropdownParent: $(modal_id)
+//     });
+
+// }
+
+// export function _pickDate(element,format,set_date=false){
+
+//     let date = '';
+
+//     date = flatpickr(element,{
+//         showMonths: true
+//     });
+
+//     if(set_date){
+//         date.setDate(new Date(set_date));
+//     }
+// }
+
+// export function _datePickr(element,format,set_date=false){
+
+//     new tempusDominus.TempusDominus(document.getElementById(element), {
+//         localization: {
+//             format: "MMMM/yyyy",
+//         },
+//         display: {
+//             viewMode: "calendar",
+//             components: {
+//                 decades: false,
+//                 year: true,
+//                 month: true,
+//                 date: false,
+//                 hours: false,
+//                 minutes: false,
+//                 seconds: false
+//             },
+//             icons: {
+//                 time: "ki-outline ki-time fs-1",
+//                 date: "ki-outline ki-calendar fs-1",
+//                 up: "ki-outline ki-up fs-1",
+//                 down: "ki-outline ki-down fs-1",
+//                 previous: "bi bi-arrow-left-short fs-1",
+//                 next: "bi bi-arrow-right-short fs-1",
+//                 today: "ki-outline ki-check fs-1",
+//                 clear: "ki-outline ki-trash fs-1",
+//                 close: "ki-outline ki-cross fs-1",
+//             },
+//         }
+//     });
+// }
 

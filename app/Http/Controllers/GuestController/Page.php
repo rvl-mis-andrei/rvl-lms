@@ -26,12 +26,12 @@ class Page extends Controller
 
     public function page_content(Request $request)
     {
-        $page  = $request->page ?? Cache::get('guest-page','dashboard');
+        $page  = $request->page ?? Cache::get('guest-page','home');
         Cookie::queue('guest-page',$page,1440);
 
         return match ($page) {
 
-            'dashboard' =>  view('guest.0001'),
+            'home' =>  view('guest.0001'),
 
             default => false,
         };

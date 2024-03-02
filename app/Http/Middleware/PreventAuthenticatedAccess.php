@@ -20,12 +20,12 @@ class PreventAuthenticatedAccess
 
         if (Auth::check()) {
             $role_url = [
-                0 => 'system-admin/dashboard',
-                1 => 'admin/dashboard',
-                2 => 'editor/dashboard',
+                1 => ['default' => 'mis/dashboard', 'route'=>'mis_login'],
+                2 => ['default' => 'hrss/dashboard', 'route'=>'hrss_login'],
+                3 => ['default' => 'guest/home', 'route'=>'guest_login'],
             ];
 
-            return redirect($role_url[Auth::user()->role]);
+            return redirect($role_url[Auth::user()->account_role->role_id]['default']);
             exit(0);
         }
 

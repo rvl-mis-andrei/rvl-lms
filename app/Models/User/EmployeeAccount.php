@@ -28,4 +28,8 @@ class EmployeeAccount extends Authenticatable
     public function account_role(){
         return $this->hasOne(EmployeeUserAccess::class,'emp_id');
     }
+
+    public function employee_info(){
+        return $this->belongsTo(Employee::class,'emp_id');
+    }
 }

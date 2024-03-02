@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
@@ -35,9 +36,9 @@ class Login extends Controller
         ];
 
         $this->role_url = [
-            1 => ['default' => 'mis/dashboard'],
-            2 => ['default' => 'admin/dashboard'],
-            3 => ['default' => 'system-admin/dashboard'],
+            1 => ['default' => 'mis/dashboard', 'route'=>'mis_login'],
+            2 => ['default' => 'hrss/dashboard', 'route'=>'hrss_login'],
+            3 => ['default' => 'guest/home', 'route'=>'guest_login'],
         ];
 
         $this->message = [
@@ -83,17 +84,13 @@ class Login extends Controller
         $this->_throwResponse($this->message[3],401,'error',csrf_token());
     }
 
-    protected function logout()
+    protected function logout(Request $r)
     {
         if(Auth::check()){
-            $user = Auth::user()->account_role;
-            $role_id = $user->checkUserRole($this->data['referer_url']);
-            $emp_id = $user->emp_id;
-
+            $role = Auth::user()->account_role->role_id;
             Auth::logout();
-            Cache::forget("ims_{$emp_id}");
-
-            return redirect("/$this->role_url[$role_id]");
+            return redirect()->route($this->role_url[$role]['route']);
+            exit(0);
         }
     }
 }

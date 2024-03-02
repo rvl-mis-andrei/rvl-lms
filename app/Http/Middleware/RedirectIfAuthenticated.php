@@ -18,10 +18,17 @@ class RedirectIfAuthenticated
     public function handle(Request $request, Closure $next, string ...$guards): Response
     {
         $guards = empty($guards) ? [null] : $guards;
+        $role_url = [
+            1 => ['default' => 'mis/dashboard'],
+            2 => ['default' => 'hrss/dashboard'],
+            3 => ['default' => 'guest/home'],
+        ];
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                // return redirect(RouteServiceProvider::HOME);
+                return redirect($role_url[Auth::user()->account_role->role_id]['default']);
+                exit(0);
             }
         }
 

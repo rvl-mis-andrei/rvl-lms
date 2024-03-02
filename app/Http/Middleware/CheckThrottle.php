@@ -33,7 +33,7 @@ class CheckThrottle
                 'payload' => 'throttle',
             ], 429)->throwResponse();
         }
-
+    
         return $next($request);
     }
 }

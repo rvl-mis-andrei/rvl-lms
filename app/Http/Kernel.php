@@ -68,6 +68,8 @@ class Kernel extends HttpKernel
         'system.admin' => \App\Http\Middleware\isSystemAdmin::class,
         'admin' => \App\Http\Middleware\isAdmin::class,
         'mis' => \App\Http\Middleware\isMIS::class,
+        'isGuest' => \App\Http\Middleware\isGuest::class,
         'check.throttle' => \App\Http\Middleware\CheckThrottle::class,
+        'preventBackHistory' =>\App\Http\Middleware\PreventBackHistory::class,
     ];
 }

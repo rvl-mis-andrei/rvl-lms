@@ -15,14 +15,14 @@ export async function page_content(page, v) {
         },
         complete: function () {
             b.release("Please Wait");
-            $("#page-content").fadeIn(500);
+            $("#kt_app_content").fadeIn(500);
             $("html, body").animate({ scrollTop: 0 }, "slow");
             const pageTitle = page.replace(/[^A-Z0-9]+/gi, " ").split(" ").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
             $("head > title").empty().append("E-Inventory | " + pageTitle);
         },
         success: async function (res) {
             gs_sessionStorage("mis-page", page);
-            $("#page-content").empty().hide().append(res).promise().done(function () {
+            $("#kt_app_content").empty().hide().append(res).promise().done(function () {
                 _pageController(page.split("/")[0], v);
             });
         },

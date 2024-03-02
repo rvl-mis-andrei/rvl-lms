@@ -13,13 +13,14 @@ class Authenticate extends Middleware
     protected function redirectTo(Request $request): ?string
     {
         if(!$request->expectsJson()){
-            return match($request->segment(1)){
-                'system-admin' => route('sys_admin_login'),
-                'admin'        => route('admin_login'),
-                default => route('mis_login'),
+            $route = match($request->segment(2)){
+                'hrss' => 'sys_admin_login',
+                'guest'        => 'guest_login',
+                'mis'        => 'mis_login',
+                default => false,
             };
-        }else{
-            return null;
-        };
+
+            return route($route);
+        }
     }
 }

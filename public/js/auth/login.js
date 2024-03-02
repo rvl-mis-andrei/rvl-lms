@@ -7,6 +7,13 @@ var fvLogin = (function () {
 
     var _handleLogin = function() {
 
+        window.onload = function () {
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.href);
+            }
+            console.log(123)
+        }
+
         form     = document.querySelector("#form-login");
         formUrl  = KTUtil.attr(form,'action');
 

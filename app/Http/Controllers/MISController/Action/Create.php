@@ -11,6 +11,7 @@ class Create extends Controller
 {
     public function index(CreateRequest $r)
     {
+        dd($r->all());
         return match($r->data1){
 
             'create-training-videos' => (new TrainingVideoServices())->create(app(TrainingVideoRequest::class)),
